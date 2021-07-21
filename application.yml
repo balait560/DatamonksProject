@@ -1,0 +1,38 @@
+source_list:
+  - SB
+  - OL
+  - CP
+  - ADDR
+
+
+OL:
+  sftp_conf:
+    filetype: csv
+    delimiter: |
+    directory: /home/ubuntu/worspace/data
+
+SB:
+  mysql_conf:
+    partition_column: App_Transaction_Id
+    query: "(select * from monks.TRANSACTIONSYNC) as t"
+
+
+s3_conf:
+  s3_bucket: stagingmonks
+  staging_location: staging
+
+
+
+
+
+mongodb_config:
+  database: school
+  collection: students
+
+redshift_conf:
+  filetype: csv
+  delimiter: |
+  dbtable: PUBLIC.TXN_FCT
+  query: SELECT txn_id, create_time, amount, cust_id from PUBLIC.TXN_FCT
+
+
