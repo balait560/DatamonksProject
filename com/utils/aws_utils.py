@@ -55,7 +55,7 @@ def sftp_data_load(spark,file_path,app_secret,file_pem):
             .option("pem", "C:\Workspace\spark.pem") \
             .option("fileType", "csv") \
             .option("delimiter", "|") \
-            .load("//home//ubuntu//data//receipts_delta_GBR_14_10_2017.csv")
+            .load("/home//ubuntu/data/receipts_delta_GBR_14_10_2017.csv")
         return ol_txn_df
 
 def mongo_data_load(spark,dbName,collName):
