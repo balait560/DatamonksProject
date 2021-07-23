@@ -1,24 +1,21 @@
 source_list:
-  - SB
   - OL
-  - CP
-  - ADDR
 
 
 OL:
   sftp_conf:
     filetype: csv
     delimiter: |
-    directory: /home/ubuntu/worspace/data
+    directory: /home/ubuntu/data
 
 SB:
   mysql_conf:
     partition_column: App_Transaction_Id
-    query: "(select * from monks.TRANSACTIONSYNC) as t"
+    query: "(select * from TRANSACTIONSYNC) as t"
 
 
 s3_conf:
-  s3_bucket: stagingmonks
+  s3_bucket: stagingmonksbala
   staging_location: staging
 
 
