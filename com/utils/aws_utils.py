@@ -73,7 +73,7 @@ def s3_data_load(spark,file_read):
                 .read \
                 .option("mode","DROPMALFORMED") \
                 .option("delimiter",",") \
-                .csv("s3_read_stg") \
+                .csv(file_read) \
                 .withColumn('ins_dt', current_date())
         return campaign_df
 
