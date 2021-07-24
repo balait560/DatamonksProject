@@ -21,12 +21,12 @@ s3_conf:
 
 
 
-CP:
+ADDR:
   mongodb_config:
     database: customer
     collection: address
 
-ADDR:
+CP:
   s3_conf_read:
     s3_bucket_read: test-spark-test
 

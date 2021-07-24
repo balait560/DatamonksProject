@@ -35,8 +35,7 @@ if __name__ == '__main__':
     spark = SparkSession \
         .builder \
         .appName("Read com.test enterprise applications") \
-        .config("spark.mongodb.input.uri=mongodb://34-251-201-160/customer.address") \
-        .master('local[*]') \
+        .config("spark.mongodb.input.uri", app_secret["mongodb_config"]["uri"] + "/customer.address") \
         .getOrCreate()
     spark.sparkContext.setLogLevel('ERROR')
     sc = spark.sparkContext
@@ -76,7 +75,7 @@ if __name__ == '__main__':
             sftp_loyalty_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
 
     #MongoDB Source
-        elif src == 'CP':
+        elif src == 'ADDR':
             print("\nReading data from mongodb using SparkSession.read.format(),")
             mongo_customer_df = ut.mongo_data_load(spark,app_conf["CP"]["mongodb_config"]["database"],
                                                    app_conf["CP"]["mongodb_config"]["collection"])
@@ -84,7 +83,7 @@ if __name__ == '__main__':
             mongo_customer_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
 
     #S3 Source
-        elif src == 'ADDR':
+        elif src == 'CP':
             print("\nReading data from Read s3 using SparkSession.read.format(),")
             s3_campaigns_df = ut.s3_data_load(spark,'s3a://'  + app_conf['ADDR']['s3_conf_read']['s3_bucket_read'] + '/KC_Extract_1_20171009.csv')
             s3_campaigns_df.show(5,False)
