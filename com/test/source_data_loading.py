@@ -69,7 +69,7 @@ if __name__ == '__main__':
 
     #MongoDB Source
         elif src == 'CP':
-            print("\nReading data from MySQL DB using SparkSession.read.format(),")
+            print("\nReading data from mongodb using SparkSession.read.format(),")
             mongo_customer_df = ut.mongo_data_load(spark,app_conf["mongodb_config"]["database"],
                                                    app_conf["mongodb_config"]["collection"]
                                                    ,app_secret,src_config)
