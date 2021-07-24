@@ -1,5 +1,5 @@
 source_list:
-  - ADDR
+  - CP
 
 
 OL:
@@ -23,8 +23,8 @@ s3_conf:
 
 CP:
   mongodb_config:
-    database: school
-    collection: students
+    database: customer
+    collection: address
 
 ADDR:
   s3_conf_read:
