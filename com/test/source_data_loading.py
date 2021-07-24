@@ -89,4 +89,4 @@ if __name__ == '__main__':
 
 
 
-# spark-submit --packages "mysql:mysql-connector-java:8.0.15" dataframe/com.test/others/systems/mysql_df.py
+# spark-submit --packages "mysql:mysql-connector-java:8.0.15" /home/hadoop/DatamonksProject/com/test/source_data_loading.py

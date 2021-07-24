@@ -72,9 +72,12 @@ def s3_data_load(spark,file_read):
         campaign_df = spark \
                 .read \
                 .option("mode","DROPMALFORMED") \
+                .option("header","False") \
                 .option("delimiter","|") \
+                .option("inferSchema", "true") \
                 .csv(file_read) \
-                .withColumn('ins_dt', current_date())
+                .withColumn('ins_dt', current_date()) \
+                .toDF("REGIS_CNTRY_CODE","REGIS_CTY_CODE","REGIS_ID","REGIS_LTY_ID","REGIS_CNSM_ID","REGIS_DATE","REGIS_TIME","REGIS_CHANNEL","REGIS_GENDER","REGIS_CITY","CHILD_ID","CHILD_NB","CHILD_GENDER","CHILD_DOB","CHILD_DECEAED","ins_dt")
         return campaign_df
 
 
