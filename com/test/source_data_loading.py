@@ -72,13 +72,12 @@ if __name__ == '__main__':
         elif src == 'CP':
             print("\nReading data from mongodb using SparkSession.read.format(),")
             mongo_customer_df = ut.mongo_data_load(spark,app_conf["CP"]["mongodb_config"]["database"],
-                                                   app_conf["CP"]["mongodb_config"]["collection"]
-                                                   ,app_secret,src_config)
+                                                   app_conf["CP"]["mongodb_config"]["collection"])
             mongo_customer_df.show(5,False)
             mongo_customer_df.write.partitionBy('ins_dt').mode('overwrite').parquet()
 
     #S3 Source
-        elif src == 'CP':
+        elif src == 'ADDR':
             print("\nReading data from MySQL DB using SparkSession.read.format(),")
             s3_campaigns_df = ut.sftp_data_load(spark,app_conf,app_secret,src_config)
             s3_campaigns_df.show(5,False)
