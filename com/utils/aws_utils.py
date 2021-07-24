@@ -68,7 +68,7 @@ def mongo_data_load(spark,dbName,collName):
             .withColumn('ins_dt', current_date())
         return customer_df
 
-def s3_data_load(spark,s3_read_stg):
+def s3_data_load(spark,s3_read):
         campaign_df = spark \
                 .read \
                 .option("mode","DROPMALFORMED") \

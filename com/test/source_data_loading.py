@@ -47,7 +47,7 @@ if __name__ == '__main__':
     for src in src_list:
         src_config = app_conf[src]
         stg_path = 's3a://' + app_conf['s3_conf']['s3_bucket'] + '/' + app_conf['s3_conf']['staging_location'] + '/' + src
-        s3_read = 's3a://'  + app_conf['ADDR']['s3_conf_read']['s3_bucket_read'] +'/KC_Extract_1_20171009.csv'
+        #s3_read = 's3a://'  + app_conf['ADDR']['s3_conf_read']['s3_bucket_read'] +'/KC_Extract_1_20171009.csv'
         print(s3_read)
         if src == 'SB':
             # use the ** operator/un-packer to treat a python dictionary as **kwargs
@@ -81,7 +81,7 @@ if __name__ == '__main__':
     #S3 Source
         elif src == 'ADDR':
             print("\nReading data from Read s3 using SparkSession.read.format(),")
-            s3_campaigns_df = ut.s3_data_load(spark,s3_read)
+            s3_campaigns_df = ut.s3_data_load(spark,'s3a://'  + app_conf['ADDR']['s3_conf_read']['s3_bucket_read'] +'/KC_Extract_1_20171009.csv')
             s3_campaigns_df.show(5,False)
             s3_campaigns_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
 
