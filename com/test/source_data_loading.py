@@ -41,7 +41,7 @@ if __name__ == '__main__':
     hadoop_conf = spark.sparkContext._jsc.hadoopConfiguration()
     hadoop_conf.set("fs.s3a.access.key", app_secret["s3_conf"]["access_key"])
     hadoop_conf.set("fs.s3a.secret.key", app_secret["s3_conf"]["secret_access_key"])
-    hadoop_conf.set("fs.s3a.endpoint", "eu-west-1.amazonaws.com")
+    hadoop_conf.set("fs.s3a.endpoint", "s3.eu-west-1.amazonaws.com")
 
     src_list = app_conf['source_list']
     print(src_list[0])
