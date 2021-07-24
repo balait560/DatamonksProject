@@ -68,9 +68,13 @@ def mongo_data_load(spark,dbName,collName):
             .withColumn('ins_dt', current_date())
         return customer_df
 
-def s3_data_load(spark):
+def s3_data_load(spark,s3_read_stg):
         campaign_df = spark \
                 .read \
-                .csv("s3://monksworkspace/data/KC_Extract_1_20171009.csv") \
+                .option("mode","DROPMALFORMED") \
+                .option("delimiter",",") \
+                .csv("s3_read_stg") \
                 .withColumn('ins_dt', current_date())
         return campaign_df
+
+

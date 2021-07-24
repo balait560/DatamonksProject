@@ -1,5 +1,5 @@
 source_list:
-  - CP
+  - ADDR
 
 
 OL:
@@ -25,6 +25,10 @@ CP:
   mongodb_config:
     database: school
     collection: students
+
+ADDR:
+  s3_conf_read:
+    s3_bucket_read: test-spark-test
 
 redshift_conf:
   filetype: csv
