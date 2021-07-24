@@ -16,7 +16,6 @@ if __name__ == '__main__':
     spark = SparkSession \
         .builder \
         .appName("Read com.test enterprise applications") \
-        .config("spark.mongodb.input.uri=mongodb://34.251.201.160/customer.address") \
         .master('local[*]') \
         .getOrCreate()
     spark.sparkContext.setLogLevel('ERROR')
@@ -90,3 +89,4 @@ if __name__ == '__main__':
 
 
 # spark-submit --packages "mysql:mysql-connector-java:8.0.15" /home/hadoop/DatamonksProject/com/test/source_data_loading.py
+  #.config("spark.mongodb.input.uri=mongodb://34.251.201.160/customer.address") \
