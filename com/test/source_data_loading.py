@@ -73,21 +73,21 @@ if __name__ == '__main__':
                                                 .withColumn('ins_dt', current_date())
             sftp_loyalty_df.show(5, False)
             sftp_loyalty_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
-
+            # S3 Source
+        elif src == 'CP':
+            print("\nReading data from Read s3 using SparkSession.read.format(),")
+            s3_campaigns_df = ut.s3_data_load(spark, 's3a://' + app_conf['CP']['s3_conf_read']['s3_bucket_read'] + '/KC_Extract_1_20171009.csv')
+            s3_campaigns_df.show(5, False)
+            s3_campaigns_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
     #MongoDB Source
         elif src == 'ADDR':
             print("\nReading data from mongodb using SparkSession.read.format(),")
-            mongo_customer_df = ut.mongo_data_load(spark,app_conf["CP"]["mongodb_config"]["database"],
-                                                   app_conf["CP"]["mongodb_config"]["collection"])
+            mongo_customer_df = ut.mongo_data_load(spark,app_conf["ADDR"]["mongodb_config"]["database"],
+                                                   app_conf["ADDR"]["mongodb_config"]["collection"])
             mongo_customer_df.show(5,False)
             mongo_customer_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
 
-    #S3 Source
-        elif src == 'CP':
-            print("\nReading data from Read s3 using SparkSession.read.format(),")
-            s3_campaigns_df = ut.s3_data_load(spark,'s3a://'  + app_conf['ADDR']['s3_conf_read']['s3_bucket_read'] + '/KC_Extract_1_20171009.csv')
-            s3_campaigns_df.show(5,False)
-            s3_campaigns_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
+
 
 
 
