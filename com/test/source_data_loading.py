@@ -42,6 +42,7 @@ if __name__ == '__main__':
     hadoop_conf.set("fs.s3a.secret.key", app_secret["s3_conf"]["secret_access_key"])
 
     src_list = app_conf['source_list']
+    print(src_list[0])
     for src in src_list:
         src_config = app_conf[src]
         stg_path = 's3a://' + app_conf['s3_conf']['s3_bucket'] + '/' + app_conf['s3_conf']['staging_location'] + '/' + src
@@ -70,8 +71,8 @@ if __name__ == '__main__':
     #MongoDB Source
         elif src == 'CP':
             print("\nReading data from mongodb using SparkSession.read.format(),")
-            mongo_customer_df = ut.mongo_data_load(spark,app_conf["mongodb_config"]["database"],
-                                                   app_conf["mongodb_config"]["collection"]
+            mongo_customer_df = ut.mongo_data_load(spark,app_conf["CP"]["mongodb_config"]["database"],
+                                                   app_conf["CP"]["mongodb_config"]["collection"]
                                                    ,app_secret,src_config)
             mongo_customer_df.show(5,False)
             mongo_customer_df.write.partitionBy('ins_dt').mode('overwrite').parquet()
