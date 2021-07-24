@@ -22,9 +22,9 @@ s3_conf:
 
 
 CP:
-mongodb_config:
-  database: school
-  collection: students
+  mongodb_config:
+    database: school
+    collection: students
 
 redshift_conf:
   filetype: csv
