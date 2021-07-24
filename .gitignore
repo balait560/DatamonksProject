@@ -134,6 +134,8 @@ dmypy.json
 *.DS_Store
 *new_user_credentials*.csv
 ../DatamonksProject/.secrets
+*new_user_credentials*.csv
+*.secrets
 *.pem
 *.ppk
 
