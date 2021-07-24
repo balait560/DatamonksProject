@@ -16,7 +16,7 @@ if __name__ == '__main__':
     spark = SparkSession \
         .builder \
         .appName("Read com.test enterprise applications") \
-        .config("spark.mongodb.input.uri=mongodb://54.246.79.168/school.students") \
+        .config("spark.mongodb.input.uri=mongodb://34.251.201.160/school.students") \
         .master('local[*]') \
         .getOrCreate()
     spark.sparkContext.setLogLevel('ERROR')
@@ -75,14 +75,14 @@ if __name__ == '__main__':
             mongo_customer_df = ut.mongo_data_load(spark,app_conf["CP"]["mongodb_config"]["database"],
                                                    app_conf["CP"]["mongodb_config"]["collection"])
             mongo_customer_df.show(5,False)
-            mongo_customer_df.write.partitionBy('ins_dt').mode('overwrite').parquet()
+            mongo_customer_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
 
     #S3 Source
         elif src == 'ADDR':
             print("\nReading data from MySQL DB using SparkSession.read.format(),")
             s3_campaigns_df = ut.sftp_data_load(spark,app_conf,app_secret,src_config)
             s3_campaigns_df.show(5,False)
-            s3_campaigns_df.write.partitionBy('ins_dt').mode('overwrite').parquet()
+            s3_campaigns_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
 
 
 
