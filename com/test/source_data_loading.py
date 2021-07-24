@@ -81,7 +81,7 @@ if __name__ == '__main__':
     #S3 Source
         elif src == 'ADDR':
             print("\nReading data from Read s3 using SparkSession.read.format(),")
-            s3_campaigns_df = ut.s3_data_load(spark,s3_read,app_secret,src_config)
+            s3_campaigns_df = ut.s3_data_load(spark,s3_read)
             s3_campaigns_df.show(5,False)
             s3_campaigns_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
 
