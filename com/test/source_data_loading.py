@@ -16,7 +16,7 @@ if __name__ == '__main__':
     spark = SparkSession \
         .builder \
         .appName("Read com.test enterprise applications") \
-        .config("spark.mongodb.input.uri=mongodb://127.0.0.1/school.students") \
+        .config("spark.mongodb.input.uri=mongodb://54.246.79.168/school.students") \
         .master('local[*]') \
         .getOrCreate()
     spark.sparkContext.setLogLevel('ERROR')
