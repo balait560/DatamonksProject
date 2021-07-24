@@ -133,7 +133,7 @@ dmypy.json
 .DS_Store?
 *.DS_Store
 *new_user_credentials*.csv
-
+*.secrets
 *.pem
 *.ppk
 
