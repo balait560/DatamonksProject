@@ -12,14 +12,7 @@ if __name__ == '__main__':
         '--packages "mysql:mysql-connector-java:8.0.15","com.amazonaws:aws-java-sdk:1.7.4","org.apache.hadoop:hadoop-aws:2.7.4","com.springml:spark-sftp_2.11:1.1.3","org.mongodb.spark:mongo-spark-connector_2.11:2.2.2" pyspark-shell'
     )
 
-    # Create the SparkSession
-    spark = SparkSession \
-        .builder \
-        .appName("Read com.test enterprise applications") \
-        .master('local[*]') \
-        .getOrCreate()
-    spark.sparkContext.setLogLevel('ERROR')
-    sc = spark.sparkContext
+
 
 
 
@@ -37,6 +30,17 @@ if __name__ == '__main__':
     app_conf = yaml.load(conf, Loader=yaml.FullLoader)
     secret = open(app_secrets_path)
     app_secret = yaml.load(secret, Loader=yaml.FullLoader)
+
+    # Create the SparkSession
+    spark = SparkSession \
+        .builder \
+        .appName("Read com.test enterprise applications") \
+        .config("spark.mongodb.input.uri=mongodb://34-251-201-160/customer.address") \
+        .master('local[*]') \
+        .getOrCreate()
+    spark.sparkContext.setLogLevel('ERROR')
+    sc = spark.sparkContext
+
     hadoop_conf = spark.sparkContext._jsc.hadoopConfiguration()
     hadoop_conf.set("fs.s3a.access.key", app_secret["s3_conf"]["access_key"])
     hadoop_conf.set("fs.s3a.secret.key", app_secret["s3_conf"]["secret_access_key"])
