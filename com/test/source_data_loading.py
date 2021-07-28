@@ -11,15 +11,6 @@ if __name__ == '__main__':
     os.environ["PYSPARK_SUBMIT_ARGS"] = (
         '--packages "mysql:mysql-connector-java:8.0.15","com.amazonaws:aws-java-sdk:1.7.4","org.apache.hadoop:hadoop-aws:2.7.4","com.springml:spark-sftp_2.11:1.1.3","org.mongodb.spark:mongo-spark-connector_2.11:2.2.2" pyspark-shell'
     )
-
-
-
-
-
-
-
-
-
     current_dir = os.path.abspath(os.path.dirname(__file__))
     print(current_dir)
     app_config_path = os.path.abspath(current_dir  + "/../../" + "application.yml")
@@ -47,7 +38,7 @@ if __name__ == '__main__':
     hadoop_conf.set("fs.s3a.readahead.range", '512M')
 
     src_list = app_conf['source_list']
-    print(src_list[0])
+
     for src in src_list:
         src_config = app_conf[src]
         stg_path = 's3a://' + app_conf['s3_conf']['s3_bucket'] + '/' + app_conf['s3_conf']['staging_location'] + '/' + src
@@ -58,38 +49,39 @@ if __name__ == '__main__':
             print("\nReading data from MySQL DB using SparkSession.read.format(),")
             mysql_transaction_df = ut.mysql_SB_data_load(spark,app_secret,src_config)
             mysql_transaction_df.show()
-
-
-
             mysql_transaction_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
-
+            print("Write the SB data in S3 completed")
     # SFTP source
         elif src == 'OL':
             print("\nReading data from SFTP  using SparkSession.read.format(),")
-            print(app_conf["OL"]["sftp_conf"]["directory"])
+
             sftp_loyalty_df = ut.sftp_data_load(spark,
-                                                app_conf["OL"]["sftp_conf"]["directory"] + "/receipts_delta_GBR_14_10_2017.csv",
-                                                app_secret,app_conf["OL"]["sftp_conf"]["directory"])\
+                                                src_config["sftp_conf"]["directory"] + "/receipts_delta_GBR_14_10_2017.csv",
+                                                app_secret,src_config["sftp_conf"]["directory"])\
                                                 .withColumn('ins_dt', current_date())
             sftp_loyalty_df.show(5, False)
             sftp_loyalty_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
+            print("Write the OL data in S3 completed")
             # S3 Source
         elif src == 'CP':
             print("\nReading data from Read s3 using SparkSession.read.format(),")
-            s3_campaigns_df = ut.s3_data_load(spark, 's3a://' + app_conf['CP']['s3_conf_read']['s3_bucket_read'] + '/KC_Extract_1_20171009.csv')
+            s3_campaigns_df = ut.s3_data_load(spark, 's3a://' + src_config['s3_conf_read']['s3_bucket_read'] + '/KC_Extract_1_20171009.csv')
             s3_campaigns_df.show(5, False)
             s3_campaigns_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
+            print("Write the CP data in S3 completed")
     #MongoDB Source
         elif src == 'ADDR':
             print("\nReading data from mongodb using SparkSession.read.format(),")
-            mongo_customer_df = ut.mongo_data_load(spark,app_conf["ADDR"]["mongodb_config"]["database"],
-                                                   app_conf["ADDR"]["mongodb_config"]["collection"])
+            mongo_customer_df = ut.mongo_data_load(spark,src_config["mongodb_config"]["database"],
+                                                   src_config["mongodb_config"]["collection"])
             mongo_customer_df.show(5,False)
             mongo_customer_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
-
+            print("Write the ADDR data in S3 completed")
 
 
 
 
 # spark-submit --packages "mysql:mysql-connector-java:8.0.15" /home/hadoop/DatamonksProject/com/test/source_data_loading.py
   #.config("spark.mongodb.input.uri=mongodb://34.251.201.160/customer.address") \
+
+##spark - submit --packages "mysql:mysql-connector-java:8.0.15,org.mongodb.spark:mongo-spark-connector_2.11:2.2.2" / home / hadoop / DatamonksProject / com / test / source_data_loading.py
