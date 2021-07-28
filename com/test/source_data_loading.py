@@ -1,9 +1,7 @@
 import os.path
-
 import yaml
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
-
 import com.utils.aws_utils as ut
 
 if __name__ == '__main__':
@@ -57,7 +55,7 @@ if __name__ == '__main__':
 
             sftp_loyalty_df = ut.sftp_data_load(spark,
                                                 src_config["sftp_conf"]["directory"] + "/receipts_delta_GBR_14_10_2017.csv",
-                                                app_secret,src_config["sftp_conf"]["directory"])\
+                                                app_secret,os.path.abspath(current_dir + "/../../" + app_secret["sftp_conf"]["pem"]))\
                                                 .withColumn('ins_dt', current_date())
             sftp_loyalty_df.show(5, False)
             sftp_loyalty_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
@@ -78,10 +76,7 @@ if __name__ == '__main__':
             mongo_customer_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
             print("Write the ADDR data in S3 completed")
 
-
-
-
 # spark-submit --packages "mysql:mysql-connector-java:8.0.15" /home/hadoop/DatamonksProject/com/test/source_data_loading.py
-  #.config("spark.mongodb.input.uri=mongodb://34.251.201.160/customer.address") \
+#.config("spark.mongodb.input.uri=mongodb://34.251.201.160/customer.address") \
 
 ##spark - submit --packages "mysql:mysql-connector-java:8.0.15,org.mongodb.spark:mongo-spark-connector_2.11:2.2.2" / home / hadoop / DatamonksProject / com / test / source_data_loading.py

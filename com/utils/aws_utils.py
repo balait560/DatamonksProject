@@ -44,17 +44,17 @@ def mysql_SB_data_load(spark,app_secret,src_config):
 
 def sftp_data_load(spark,file_path,app_secret,file_pem):
 
-        file_loc = os.path.abspath(file_pem) + "/" + app_secret["sftp_conf"]["pem"]
+
 
         ol_txn_df = spark.read \
             .format("com.springml.spark.sftp") \
             .option("host", app_secret["sftp_conf"]["hostname"]) \
             .option("port", app_secret["sftp_conf"]["port"]) \
             .option("username", app_secret["sftp_conf"]["username"]) \
-            .option("pem", file_loc) \
+            .option("pem", file_pem) \
             .option("fileType", "csv") \
             .option("delimiter", "|") \
-            .load("/home//ubuntu/data/receipts_delta_GBR_14_10_2017.csv")
+            .load(file_path)
         return ol_txn_df
 
 def mongo_data_load(spark,dbName,collName):
