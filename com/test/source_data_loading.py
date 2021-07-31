@@ -4,7 +4,7 @@ import os.path
 import sys
 from pyspark.sql.functions import current_date
 
-import com.utils.aws_utils as ut
+from com.utils import aws_utils as ut
 
 if __name__ == '__main__':
 
