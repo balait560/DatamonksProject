@@ -4,8 +4,8 @@ source_list:
   - CP
   - ADDR
 target_list:
- - REGIS_DIM
-#  - CHILD_DIM
+#- REGIS_DIM
+  - CHILD_DIM
 #  - RTL_TXN_FCT
 
 OL:
