@@ -82,7 +82,7 @@ if __name__ == '__main__':
                 print(jdbc_url)
                 REGIS_DIM = spark.read \
                             .format("io.github.spark_redshift_community.spark.redshift")\
-                            .option("jdbc",jdbc_url) \
+                            .option("url",jdbc_url) \
                             .option("tempdir", "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/temp") \
                             .option("forward_spark_s3_credentials", "true") \
                             .option("dbtable", "DATAMART.REGIS_DIM") \
