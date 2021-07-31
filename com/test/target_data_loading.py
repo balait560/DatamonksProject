@@ -33,7 +33,7 @@ if __name__ == '__main__':
                file_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/" +app_conf["s3_conf"]["staging_location"] + "/" + src
                src_df = ut.read_parquet_from_s3(spark,file_path)
                src_df.show()
-               src_df.createOrReplaceView(src)
+               src_df.createOrReplaceTempView(src)
                src_df.printSchema()
            print("Preparing target data for Data Mart ",tgt)
            regis_dim_df = spark.sql(tgt_conf['loadingQuery'])
