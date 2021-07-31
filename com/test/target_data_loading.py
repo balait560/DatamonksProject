@@ -33,6 +33,11 @@ if __name__ == '__main__':
                file_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/" +app_conf["s3_conf"]["staging_location"] + "/" + src
                src_df = ut.read_parquet_from_s3(spark,file_path)
                src_df.show()
+               if src == 'ADDR':
+                   src_df = src_df.withColumn("street",col("address.street")) \
+                            .withColumn("city",col("address.city")) \
+                            .withColumn("state", col("address.state")) \
+                            .drop("address")
                src_df.createOrReplaceTempView(src)
                src_df.printSchema()
            print("Preparing target data for Data Mart ",tgt)
