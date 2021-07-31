@@ -56,7 +56,7 @@ if __name__ == '__main__':
            src = tgt_conf['source_data']
            file_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/" + app_conf["s3_conf"]["staging_location"] + "/" + src
            src_df = ut.read_parquet_from_s3(spark,file_path)
-           src_df.createOrReplaceView(src)
+           src_df.createOrReplaceTempView(src)
            src_df.printSchema()
            src_df.show(5, False)
            print('Preparing the',tgt,'data,')
