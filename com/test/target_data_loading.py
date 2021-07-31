@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
     hadoop_conf = spark.sparkContext._jsc.hadoopConfiguration()
     hadoop_conf.set("fs.s3a.access.key",app_secret["s3_conf"]["access_key"])
-    hadoop_conf.set("fs.s3a.secret.key",app_secret["s3_conf"]["secrete_key"])
+    hadoop_conf.set("fs.s3a.secret.key",app_secret["s3_conf"]["secret_access_key"])
     tgt_list = app_conf["target_list"]
     for tgt in tgt_list:
         tgt_conf = app_conf[tgt]
