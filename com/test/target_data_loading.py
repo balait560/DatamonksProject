@@ -2,7 +2,7 @@ import os.path
 import yaml
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
-
+import com.utils.aws_utils as ut
 
 if __name__ == '__main__':
     os.environ["PYSPARK_SUBMIT_ARGS"] = ('--packages "mysql:mysql-connector-java:8.0.15","com.amazonaws:aws-java-sdk:1.7.4","org.apache.hadoop:hadoop-aws:2.7.4","com.springml:spark-sftp_2.11:1.1.3","org.mongodb.spark:mongo-spark-connector_2.11:2.2.2" pyspark-shell')
