@@ -65,7 +65,7 @@ if __name__ == '__main__':
            jdbc_url = ut.get_redshift_jdbc_url(app_secret)
            ut.write_data_to_Redshift(child_dim_df,
                                      jdbc_url,"s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/temp",
-                                     tgt_conf['tablename'])
+                                     tgt_conf['tableName'])
            print("Completed <<<<<<<< child table")
         elif tgt == 'RTL_TXN_FCT':
             for tgt in tgt_list:
