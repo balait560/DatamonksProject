@@ -10,11 +10,11 @@ if __name__ == '__main__':
         '--packages "mysql:mysql-connector-java:8.0.15","com.amazonaws:aws-java-sdk:1.7.4","org.apache.hadoop:hadoop-aws:2.7.4","com.springml:spark-sftp_2.11:1.1.3","org.mongodb.spark:mongo-spark-connector_2.11:2.2.2" pyspark-shell'
     )
     current_dir = os.path.abspath(os.path.dirname(__file__))
-    print(current_dir)
+
     app_config_path = os.path.abspath(current_dir  + "/../../" + "application.yml")
-    print(app_config_path)
+
     app_secrets_path = os.path.abspath(current_dir + "/../../" + ".secrets")
-    print(app_secrets_path)
+
     conf = open(app_config_path)
     app_conf = yaml.load(conf, Loader=yaml.FullLoader)
     secret = open(app_secrets_path)
@@ -32,8 +32,8 @@ if __name__ == '__main__':
     hadoop_conf = spark.sparkContext._jsc.hadoopConfiguration()
     hadoop_conf.set("fs.s3a.access.key", app_secret["s3_conf"]["access_key"])
     hadoop_conf.set("fs.s3a.secret.key", app_secret["s3_conf"]["secret_access_key"])
-    hadoop_conf.set("fs.s3a.endpoint", "s3.eu-west-1.amazonaws.com")
-    hadoop_conf.set("fs.s3a.readahead.range", '512M')
+    #hadoop_conf.set("fs.s3a.endpoint", "s3.eu-west-1.amazonaws.com")
+    #hadoop_conf.set("fs.s3a.readahead.range", '512M')
 
     src_list = app_conf['source_list']
 
