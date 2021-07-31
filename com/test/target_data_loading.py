@@ -95,7 +95,7 @@ if __name__ == '__main__':
                 ut.write_data_to_Redshift(rtl_txf_fct_df,jdbc_url,
                                           "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/temp",
                                          tgt_conf['tableName'])
-                print('Completed <<<<<<<<',tgt_conf['tablename'])
+                print('Completed <<<<<<<<',tgt_conf['tableName'])
 
 
 
