@@ -1,7 +1,9 @@
-import os.path
-import yaml
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import *
+import yaml
+import os.path
+import sys
+from pyspark.sql.functions import current_date
+
 import com.utils.aws_utils as ut
 
 if __name__ == '__main__':
