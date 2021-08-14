@@ -19,6 +19,10 @@ def s3_data_load_snow(spark, file_read):
 
     return df_snow
 
+
+
+
+
 if __name__ == '__main__':
     os.environ["PYSPARK_SUBMIT_ARGS"] = ('--packages "com.amazonaws:aws-java-sdk:1.7.4","org.apache.hadoop:hadoop-aws:2.7.4","net.snowflake:snowflake-jdbc:3.11.1","net.snowflake:spark-snowflake_2.11:2.4.14-spark_2.4" pyspark-shell')
     current_dir = os.path.abspath(os.path.dirname(__file__))
@@ -38,7 +42,7 @@ if __name__ == '__main__':
         .getOrCreate()
 
     # snowflake property setting
-    spark._jvm.net.snowflake.spark.snowflake.SnowflakeConnectorUtils.enablePushdownSession(spark._jvm.org.apache.spark.sql.SparkSession.builder().getOrCreate())
+    #spark._jvm.net.snowflake.spark.snowflake.SnowflakeConnectorUtils.enablePushdownSession(spark._jvm.org.apache.spark.sql.SparkSession.builder().getOrCreate())
     spark.sparkContext.setLogLevel("ERROR")
 
     print('bala')
