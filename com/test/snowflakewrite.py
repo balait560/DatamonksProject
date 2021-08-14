@@ -56,4 +56,4 @@ if __name__ == '__main__':
 
 
 
-
+##spark-submit --packages "com.amazonaws:aws-java-sdk:1.7.4,org.apache.hadoop:hadoop-aws:2.7.4,net.snowflake:snowflake-jdbc:3.11.1,net.snowflake:spark-snowflake_2.11:2.4.14-spark_2.4" com/test/snowflakewrite.py
