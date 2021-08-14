@@ -62,8 +62,8 @@ if __name__ == '__main__':
         "sfAccount": "OW87045",
         "sfUser": "balait560",
         "sfPassword": "Lakshan@06",
-        "sfDatabase": "test",
-        "sfSchema": "test_customer",
+        "sfDatabase": "SNOWFLAKE_SAMPLE_DATA",
+        "sfSchema": "TPCH_SF1",
         "sfWarehouse": "COMPUTE_WH",
         "sfRole": "sysadmin"
     }
@@ -74,3 +74,4 @@ if __name__ == '__main__':
 
 
 ##spark-submit --packages "com.amazonaws:aws-java-sdk:1.7.4,org.apache.hadoop:hadoop-aws:2.7.4,net.snowflake:snowflake-jdbc:3.11.1,net.snowflake:spark-snowflake_2.11:2.4.14-spark_2.4" com/test/snowflakewrite.py
+#working spark-submit --packages "com.amazonaws:aws-java-sdk:1.7.4,org.apache.hadoop:hadoop-aws:2.7.4,net.snowflake:snowflake-jdbc:3.12.8,net.snowflake:spark-snowflake_2.11:2.7.2-spark_2.4" com/test/snowflakewrite.py
