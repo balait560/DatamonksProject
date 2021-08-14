@@ -62,8 +62,8 @@ if __name__ == '__main__':
         "sfAccount": "OW87045",
         "sfUser": "balait560",
         "sfPassword": "Lakshan@06",
-        "sfDatabase": "SNOWFLAKE_SAMPLE_DATA",
-        "sfSchema": "TPCH_SF1",
+        "sfDatabase": "test",
+        "sfSchema": "test_customer",
         "sfWarehouse": "COMPUTE_WH",
         "sfRole": "sysadmin"
     }
