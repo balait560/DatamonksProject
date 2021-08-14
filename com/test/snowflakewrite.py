@@ -63,7 +63,7 @@ if __name__ == '__main__':
         "sfUser": "balait560",
         "sfPassword": "Lakshan@06",
         "sfDatabase": "test",
-        "sfSchema": "test_customer",
+        "sfSchema": "public",
         "sfWarehouse": "COMPUTE_WH",
         "sfRole": "sysadmin"
     }
