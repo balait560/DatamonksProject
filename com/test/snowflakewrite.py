@@ -6,7 +6,18 @@ from pyspark import SparkConf, SparkContext
 import yaml
 import os.path
 import sys
-from com.utils import aws_utils as ut
+#from com.utils import aws_utils as ut
+
+def s3_data_load_snow(spark, file_read):
+    df_snow = spark \
+        .read \
+        .option("mode", "DROPMALFORMED") \
+        .option("header", "False") \
+        .option("delimiter", "~") \
+        .option("inferSchema", "true") \
+        .csv(file_read)
+
+    return df_snow
 
 if __name__ == '__main__':
     os.environ["PYSPARK_SUBMIT_ARGS"] = ('--packages "com.amazonaws:aws-java-sdk:1.7.4","org.apache.hadoop:hadoop-aws:2.7.4","net.snowflake:snowflake-jdbc:3.11.1","net.snowflake:spark-snowflake_2.11:2.4.14-spark_2.4" pyspark-shell')
@@ -36,7 +47,8 @@ if __name__ == '__main__':
     hadoop_conf.set("fs.s3a.access.key", app_secret["s3_conf"]["access_key"])
     hadoop_conf.set("fs.s3a.secret.key", app_secret["s3_conf"]["secret_access_key"])
 
-    s3_path = ut.s3_data_load_snow(spark,'s3a://' + app_conf['CP']['s3_conf_read']['s3_bucket_read'] + '/' + 'cust_name.csv')
+
+    s3_path = s3_data_load_snow(spark,'s3a://' + app_conf['CP']['s3_conf_read']['s3_bucket_read'] + '/' + 'cust_name.csv')
     s3_path.show(5,False)
 
     # set the below snowflake properties for connectivity
