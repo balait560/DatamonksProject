@@ -69,7 +69,7 @@ if __name__ == '__main__':
     }
 
     SNOWFLAKE_SOURCE_NAME = "net.snowflake.spark.snowflake"
-    s3_path.write.format(SNOWFLAKE_SOURCE_NAME).options(**sfOptions).option("dbtable", "cust_name").mode('append').save()
+    s3_path.write.format(SNOWFLAKE_SOURCE_NAME).options(**sfOptions).option("dbtable", "cust_dtl").mode('append').save()
 
 
 
