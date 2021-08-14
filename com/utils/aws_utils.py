@@ -80,6 +80,18 @@ def s3_data_load(spark,file_read):
         return campaign_df
 
 
+def s3_data_load_snow(spark, file_read):
+    df_snow = spark \
+        .read \
+        .option("mode", "DROPMALFORMED") \
+        .option("header", "False") \
+        .option("delimiter", "~") \
+        .option("inferSchema", "true") \
+        .csv(file_read)
+
+    return df_snow
+
+
 def read_parquet_from_s3(spark,file_path):
     return spark.read.option("header","true") \
             .option("delimiter","|").parquet(file_path)
