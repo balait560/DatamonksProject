@@ -6,7 +6,7 @@ from pyspark import SparkConf, SparkContext
 import yaml
 import os.path
 import sys
-from com.utils import aws_utils as ut
+import com.utils.aws_utils as ut
 if __name__ == '__main__':
     os.environ["PYSPARK_SUBMIT_ARGS"] = ('--packages "com.amazonaws:aws-java-sdk:1.7.4","org.apache.hadoop:hadoop-aws:2.7.4","net.snowflake:snowflake-jdbc:3.11.1","net.snowflake:spark-snowflake_2.11:2.4.14-spark_2.4" pyspark-shell')
     current_dir = os.path.abspath(os.path.dirname(__file__))
